@@ -1,10 +1,13 @@
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Cardjc } from './components/Cardjc';
+import 'antd/dist/antd.css';
 
 const App = () => {
   const [isLoanding, SetIsLoanding] = useState(false);
   const [characters, setCharacter] = useState([]);
+  const [idPersonaje, setIdPersonaje] = useState(0);
 
   const getCharacters = async () => {
     SetIsLoanding(true);
@@ -17,11 +20,19 @@ const App = () => {
     getCharacters();
   }, []);
 
-  return (
+  console.log(idPersonaje);
+  console.log(characters);
 
+  return (
     <div className="App">
-        {isLoanding && <p>Cargando...</p>}
-        { characters?.map(character => <p key={character.id}>{character.name}</p>) }
+      {isLoanding && <p>Cargando...</p>}
+      {characters?.map((character) => (
+        <Cardjc
+        character={character}
+        key={character.id}
+        setIdPersonaje={setIdPersonaje} />
+      ))}
+      ;
     </div>
   );
 };
